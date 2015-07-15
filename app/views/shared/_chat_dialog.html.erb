@@ -1,0 +1,13 @@
+<div id="chat-info" class="col-md-3 col-md-offset-9 chat-info">
+  <div id="chat-dialog" class="row chat-dialog" visible=false>
+    <div id="message-history-chat" class="col-md-12 message-history"></div>
+    <input type="text" class="col-md-12" id="message-input-field" />
+  </div>
+  <div id="chat-dialog-btn" class="row chat-dialog-btn">
+    <%= image_tag "up-arrow.png", alt: "Show chat dialog", size: "20x20",
+      class: "col-md-2", id: "chat-dialog-btn-img" %>
+    <div id="chat-dialog-btn-text" class="col-md-8"><%= t "chat.show_chat_dialog" %></div>
+  <div>
+</div>
+
+<%= javascript_include_tag "custom_websocket", "data-turbolinks-track" => true %>

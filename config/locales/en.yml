@@ -48,3 +48,9 @@ en:
     new:
       name: "Create New Address"
       button: "Create New Address"
+  chat:
+    show_chat_dialog: "Show chat dialog"
+    hide_chat_dialog: "Hide chat dialog"
+    send: "Send"
+    connected: "connected!"
+    disconnected: "disconnected!"

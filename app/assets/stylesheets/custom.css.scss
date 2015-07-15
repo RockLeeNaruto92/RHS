@@ -155,3 +155,30 @@ html, body{
   top: 5%;
   right: 6%;
 }
+
+.chat-info{
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  .chat-dialog{
+    .message-history{
+      background: white;
+      height: 150px;
+      overflow-y: scroll;
+      padding: 2px;
+      border: 1px solid rgba(29, 49, 91, .3);
+      border-width: 1px;
+      .chat-user-name{
+        background: rgba(0, 153, 255, 1);
+        margin-right: 5px;
+      }
+    }
+    .message_input{
+      border-width: 1px !important;
+    }
+  }
+  .chat-dialog-btn{
+    height: 20px;
+    background: rgba(215, 216, 237, 1);
+  }
+}

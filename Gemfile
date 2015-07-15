@@ -22,9 +22,10 @@ gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
-gem "omniauth-linkedin" 
+gem "omniauth-linkedin"
 gem "rails_admin", github: "sferik/rails_admin"
 gem 'fancybox2-rails'
+gem "websocket-rails"
 
 group :development, :test do
   gem "dotenv-rails"
