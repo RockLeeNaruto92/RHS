@@ -1,0 +1,64 @@
+class @ChatApp
+  formatMessage: (response)->
+    if response['user'] == null
+      return ""
+    return """
+      <div class="row one-chat-message">
+        <div class="col-md-2 one-chat-img">
+          <img src="<%= image_path 'avatar_default.jpg' %>" width="30px" height="30px" />
+        </div>
+        <div class="message-container">
+          <div class="col-md-9 message-content">#{response['message']}</div>
+        </div>
+      </div>
+      """
+
+  constructor: ->
+    @dispatcher = new WebSocketRails(location.host + "/websocket")
+    @initState()
+    @bindEvents()
+    @setListener()
+
+  initState: ->
+    $("#message-input-field").prop 'disabled', true
+    return
+
+  bindEvents: ->
+    @dispatcher.bind 'client_connected', (response) ->
+      return
+    @dispatcher.bind 'client_disconnected', (response) ->
+      return
+    @dispatcher.bind 'new_message', @processNewMessage
+
+  setListener: ->
+    $('#message-input-field').keyup @sendData
+    $('#chat-send-btn').click @sendData
+    $('#chat-dialog-btn').click @displayChatDialog
+
+  sendData: (event) =>
+    message = $("#message-input-field").val()
+    if (event.keyCode == 13 and message != "") or event.type == "click"
+      $("#message-input-field").val("")
+      window.chatApp.dispatcher.trigger 'new_message', message
+    return
+
+  displayChatDialog: ->
+    if $('#chat-info').css("bottom") == "-460px"
+      $('#chat-dialog-btn').prop 'class', 'fa fa-angle-double-down'
+      $('#chat-info').animate bottom: '0px'
+    else
+      $('#chat-dialog-btn').prop 'class', 'fa fa-angle-double-up'
+      $('#chat-info').animate bottom: '-460px'
+
+  processNewMessage: (response) =>
+    if response["is_signed_in"] == true
+      $("#message-input-field").prop 'disabled', false
+    else
+      $("#message-input-field").val "Login to chat"
+    $("#message-history-chat").append @formatMessage(response)
+    height = $("#message-history-chat")[0].scrollHeight + ''
+    $("#message-history-chat").animate scrollTop: height
+    return
+
+$(document).ready ->
+  window.chatApp = new ChatApp

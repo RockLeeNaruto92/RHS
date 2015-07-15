@@ -80,6 +80,13 @@ en:
   contact: "Contact: "
   square: "Square: "
   recent_address: "Recent added address"
-  button: 
+  button:
     add_address: "Add new address"
     quick_guide: "How to add address"
+  chat:
+    show_chat_dialog: "Show chat dialog"
+    hide_chat_dialog: "Hide chat dialog"
+    send: "Send"
+    connected: "connected!"
+    disconnected: "disconnected!"
+    head: "Group chat history"

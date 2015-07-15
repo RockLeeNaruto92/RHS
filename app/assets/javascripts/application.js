@@ -16,6 +16,8 @@
 //= require bootstrap
 //= require fancybox
 //= require custom
+//= require websocket_rails/main
+//= require custom_websocket
 
 $(document).ready(function(){
   $("#myModalName").html($("#new_address").data("name"));
@@ -31,3 +33,5 @@ function onClick(){
     $(this).removeData("bs.modal");
   });
 }
+
+

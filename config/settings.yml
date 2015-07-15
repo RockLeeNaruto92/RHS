@@ -14,5 +14,7 @@ image_sample:
   - /app/assets/images/house2.jpg
   - /app/assets/images/house3.jpg
 user:
-  avatar_default: "avatar_default.jpg"  
+  avatar_default: "avatar_default.jpg"
 num_of_recent_addresses: 10
+chat:
+  img_size: "20x20"
