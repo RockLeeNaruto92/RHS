@@ -1,33 +1,54 @@
 class @ChatApp
-  formatMessage: (response)->
-    if response['user'] == null
-      return ""
+  formatMessage: (response) =>
+    if @user_id == response.user.id
+      return """
+        <div class="row one-chat-message">
+          <div class="message-container-right">
+            <div class="col-md-9 message-content-right">#{response.message.content}</div>
+          </div>
+        </div>
+        """
+    else
+      return """
+        <div class="row one-chat-message">
+          <div class="col-md-2 one-chat-img-left">
+            <%= image_tag "avatar_default.jpg", size: Settings.chat.img_size %>
+          </div>
+          <div class="message-container-left">
+            <div class="col-md-9 message-content-left">
+              #{response.message.content}
+            </div>
+          </div>
+        </div>
+        """
+
+  formatAnnounceMessage: (response) =>
     return """
-      <div class="row one-chat-message">
-        <div class="col-md-2 one-chat-img">
-          <img src="<%= image_path 'avatar_default.jpg' %>" width="30px" height="30px" />
-        </div>
-        <div class="message-container">
-          <div class="col-md-9 message-content">#{response['message']}</div>
-        </div>
+      <div class="row message-announce col-md-offset-2">
+        <a class="message-announce-name">#{response.user.name}</a> #{response.message.content}
       </div>
       """
 
   constructor: ->
     @dispatcher = new WebSocketRails(location.host + "/websocket")
+    @user_id = $("#header_wrapper").data("id")
     @initState()
     @bindEvents()
     @setListener()
 
   initState: ->
-    $("#message-input-field").prop 'disabled', true
+    console.log("<%= image_path "chat-left-arrow.png" %>")
+    if @user_id == ""
+      $("#message-input-field").prop 'placeholder', 'Login to chat'
+      $("#message-input-field").prop 'disabled', 'true'
+    else
+      $("#message-input-field").prop 'placeholder', ''
+      $("#message-input-field").prop 'disable', 'false'
     return
 
   bindEvents: ->
-    @dispatcher.bind 'client_connected', (response) ->
-      return
-    @dispatcher.bind 'client_disconnected', (response) ->
-      return
+    @dispatcher.bind 'client_connected', @processClientConnected
+    @dispatcher.bind 'client_disconnected', @processClientDisconnected
     @dispatcher.bind 'new_message', @processNewMessage
 
   setListener: ->
@@ -51,13 +72,24 @@ class @ChatApp
       $('#chat-info').animate bottom: '-460px'
 
   processNewMessage: (response) =>
-    if response["is_signed_in"] == true
-      $("#message-input-field").prop 'disabled', false
+    if response.message.type == "new_message"
+      message = @formatMessage(response)
     else
-      $("#message-input-field").val "Login to chat"
-    $("#message-history-chat").append @formatMessage(response)
+      message = @formatAnnounceMessage(response)
+    @appendMessage(message)
+    return
+
+  appendMessage: (message) =>
+    $("#message-input-field").prop 'placeholder', ''
+    $("#message-history-chat").append message
     height = $("#message-history-chat")[0].scrollHeight + ''
     $("#message-history-chat").animate scrollTop: height
+    return
+
+  processClientConnected: (response) =>
+    return
+
+  processClientDisconnected: (response) =>
     return
 
 $(document).ready ->

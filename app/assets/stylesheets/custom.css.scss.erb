@@ -503,20 +503,79 @@ div.modal-content {
 }
 
 .one-chat-message{
+  font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 10px;
-  .one-chat-img{
+  .one-chat-img-left{
     padding-left: 5px;
   }
-  .message-container{
+  .one-chat-img-right{
+    padding-right: 5px;
+  }
+  .message-container-left{
     position: relative;
-    .message-content{
+    .message-content-left{
+      width: auto;
+      max-width: 200px;
+      font-family: helvetica, arial, sans-serif;
       word-wrap: break-word;
-      border: 2px solid #a1a1a1;
-      background: #dddddd;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-      border-bottom-left-radius: 5px;
+      border: 1px solid #a1a1a1;
+      background: #dbedfe;
+      border-radius: 3px;
+      color: #373e4d;
+      padding-left: 6px;
+      padding-right: 5px;
+      padding-bottom: 3px;
+      padding-top: 4px;
+      text-align: left;
+      line-height: 1.28;
+      font-size: 12px;
+      &:after {
+        content: "";
+        width: 8px;
+        height: 7px;
+        position: absolute;
+        left: -8px;
+        top: 2px;
+        background-image: url("<%= image_path "chat-left-arrow.png" %>")
+      }
     }
   }
+  .message-container-right{
+    padding: 10px;
+    position: relative;
+    .message-content-right{
+      width: auto;
+      max-width: 200px;
+      font-family: helvetica, arial, sans-serif;
+      word-wrap: break-word;
+      border: 1px solid #a1a1a1;
+      background: #dbedfe;
+      border-radius: 3px;
+      color: #373e4d;
+      padding-left: 6px;
+      padding-right: 5px;
+      padding-bottom: 3px;
+      padding-top: 4px;
+      text-align: left;
+      line-height: 1.28;
+      font-size: 12px;
+      float: right;
+      &:after {
+        content: "";
+        width: 8px;
+        height: 7px;
+        position: absolute;
+        right: -8px;
+        top: 2px;
+        background-image: url("<%= image_path "chat-right-arrow.png" %>")
+      }
+    }
+  }
+}
+
+.message-announce{
+  font-style: italic;
+  font-size: 12px;
+  font-color: #0086b3;
+  font-family: "Times New Roman", Times, serif;
 }

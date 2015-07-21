@@ -87,6 +87,7 @@ en:
     show_chat_dialog: "Show chat dialog"
     hide_chat_dialog: "Hide chat dialog"
     send: "Send"
+    input-holder: "Login to chat"
     connected: "connected!"
     disconnected: "disconnected!"
     head: "Group chat history"
