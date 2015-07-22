@@ -28,6 +28,7 @@ gem "fancybox2-rails"
 gem "bootstrap-social-rails"
 gem "font-awesome-rails"
 gem "websocket-rails"
+gem "warden"
 
 group :development, :test do
   gem "dotenv-rails"
